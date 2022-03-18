@@ -10,6 +10,7 @@ const CreateNote = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     props.passNote(note);
+    setNote({ title: "", content: "" });
   };
   const InputEvent = (e) => {
     const { name, value } = e.target;
