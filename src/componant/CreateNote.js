@@ -7,6 +7,10 @@ const CreateNote = (props) => {
     title: "",
     content: "",
   });
+  const onSubmit = (e) => {
+    e.preventDefault();
+    props.passNote(note);
+  };
   const InputEvent = (e) => {
     const { name, value } = e.target;
 
@@ -17,15 +21,12 @@ const CreateNote = (props) => {
       };
     });
   };
-  const addEvent = () => {
-    props.passNote(note);
-  };
   return (
     <section
       className="w-1/2 md:w-2/6 xl:w-1/6 flex items-center mx-auto pt-16 mb-52"
       onDoubleClick={() => setShow(false)}
     >
-      <form className="w-full h-full bg-white rounded-xl">
+      <form className="w-full h-full bg-white rounded-xl" onSubmit={onSubmit}>
         {show ? (
           <input
             type="text"
@@ -35,6 +36,7 @@ const CreateNote = (props) => {
             placeholder="Title"
             autoComplete="off"
             className="outline-none w-full h-16 px-2 bg-transparent"
+            required
           />
         ) : null}
         <div className="relative" onClick={() => setShow(true)}>
@@ -44,11 +46,12 @@ const CreateNote = (props) => {
             onChange={InputEvent}
             placeholder="Write a note......"
             className="outline-none w-full h-32 p-2 bg-transparent"
+            required
           />
           {show ? (
-            <div className="bottom-2 right-0 absolute" onClick={addEvent}>
+            <button type="submit" className="bottom-2 right-0 absolute">
               <MdAddCircle className="text-3xl text-slate-600 hover:text-teal-500" />
-            </div>
+            </button>
           ) : null}
         </div>
       </form>
